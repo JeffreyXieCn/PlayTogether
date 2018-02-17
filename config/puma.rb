@@ -1,4 +1,4 @@
-workers Integer(ENV['WEB_CONCURRENCY'] || 2)
+#workers Integer(ENV['WEB_CONCURRENCY'] || 2) # It will trigger ERROR: worker mode not supported on JRuby or Windows
 threads_count = Integer(ENV['RAILS_MAX_THREADS'] || 5)
 threads threads_count, threads_count
 

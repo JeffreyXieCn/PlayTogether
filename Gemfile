@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'rails',                   '5.1.4'
-gem 'bcrypt',                  '3.1.11', platforms: [:ruby, :x64_mingw, :mingw] #to avoid bcrypt.rb:16:in `require': cannot load such file -- bcrypt_ext (LoadError)
+
+# comment out, bundle install, gem install bcrypt --platform=ruby, uncomment out, bundle install
+gem 'bcrypt',                  '3.1.11', platforms: [:ruby, :x64_mingw, :mingw] #to avoid bcrypt.rb:16:in `require': cannot load such file -- bcrypt_ext (LoadError).
 gem 'faker',                   '1.7.3'
 gem 'carrierwave',             '1.2.2'
 gem 'mini_magick',             '4.7.0'
@@ -30,6 +32,7 @@ group :development do
   gem 'listen',                '3.1.5'
   gem 'spring',                '2.0.2'
   gem 'spring-watcher-listen', '2.0.1'
+  gem 'annotate'
 end
 
 group :test do
