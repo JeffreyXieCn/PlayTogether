@@ -3,8 +3,8 @@
 # Table name: members
 #
 #  id         :integer          not null, primary key
-#  balance    :decimal(10, 2)
-#  admin      :boolean
+#  balance    :decimal(10, 2)   default(0.0)
+#  admin      :boolean          default(FALSE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :integer

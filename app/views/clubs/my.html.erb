@@ -1,0 +1,10 @@
+<% provide(:title, 'My clubs') %>
+<h1>My Clubs</h1>
+
+<%= will_paginate @my_clubs%>
+
+<ul class="clubs">
+  <%= render @my_clubs %>
+</ul>
+
+<%= will_paginate @my_clubs%>

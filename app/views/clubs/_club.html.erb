@@ -8,4 +8,11 @@
     <strong>Description:</strong>
     <%= club.description %>
   </p>
+
+  <% if current_user?(get_club_admin(club)) %>
+    <%= link_to "edit", edit_club_path(club) %>
+    <%= link_to "delete", club, method: :delete,
+                  data: { confirm: "You sure?" } %>
+
+  <% end %>
 </li>

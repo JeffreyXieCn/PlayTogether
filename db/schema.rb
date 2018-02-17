@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180215130418) do
+ActiveRecord::Schema.define(version: 20180217172940) do
 
   create_table "clubs", force: :cascade do |t|
     t.string "name"
@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 20180215130418) do
   end
 
   create_table "members", force: :cascade do |t|
-    t.decimal "balance", precision: 10, scale: 2
-    t.boolean "admin"
+    t.decimal "balance", precision: 10, scale: 2, default: "0.0"
+    t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
