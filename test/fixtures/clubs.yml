@@ -11,10 +11,15 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  description: MyText
+badminton:
+  name: Badminton
+  description: Badminton is origianted from UK
 
-two:
-  name: MyString
-  description: MyText
+basketball:
+  name: Basketball
+  description: Basketball is invented in USA
+
+football:
+  name: Football
+  description: Football is the most popular sport in the world
+

@@ -22,4 +22,12 @@ class MemberTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+  def setup
+    @badminton_admin = members(:badminton_admin)
+    @badminton_member = members(:badminton_member_lana)
+  end
+
+  test "by default a club member is not admin" do
+    assert_not @badminton_member.admin?
+  end
 end

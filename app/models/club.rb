@@ -13,7 +13,4 @@ class Club < ApplicationRecord
   has_many :members
   validates :name,  presence: true, length: { maximum: 50 }
 
-  def club_admin?(user)
-
-  end
 end

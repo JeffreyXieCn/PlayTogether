@@ -18,10 +18,35 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+badminton_admin:
   balance: 9.99
-  admin: false
+  admin: true
+  club: badminton
+  user: michael
 
-two:
+badminton_member_lana:
   balance: 9.99
-  admin: false
+  club: badminton
+  user: lana
+
+basketball_admin:
+  balance: 9.99
+  admin: true
+  club: basketball
+  user: archer
+
+basketball_member_michael:
+  balance: 9.99
+  club: basketball
+  user: michael
+
+basketball_member_malory:
+  balance: 9.99
+  club: basketball
+  user: malory
+
+football_admin:
+  balance: 9.99
+  admin: true
+  club: football
+  user: michael
