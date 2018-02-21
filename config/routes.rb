@@ -62,6 +62,10 @@ Rails.application.routes.draw do
     collection do
       get 'my' # list the clubs that I am a member
     end
+
+    member do
+      post 'join'
+    end
   end
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]

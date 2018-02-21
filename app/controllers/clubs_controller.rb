@@ -1,7 +1,7 @@
 class ClubsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy, :my]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy, :my, :join]
   #before_action :correct_user, only: [:my]
-  before_action :club_exists, only: [:show, :edit, :update]
+  before_action :club_exists, only: [:show, :edit, :update, :join]
   before_action :club_admin, only: [:edit, :update]
 
   def index
@@ -48,6 +48,23 @@ class ClubsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def join
+    # make sure the current user is not already in this club
+    user = current_user
+    member_exist = Member.find_by(user_id: user.id, club_id: @club.id)
+    if member_exist
+      flash[:warning] = 'You are already in this club'
+    else
+      member = Member.new
+      member.user = user
+      member.club = @club
+      member.save
+
+      flash[:success] = 'You joined this club.'
+    end
+    redirect_to @club
   end
 
   def destroy

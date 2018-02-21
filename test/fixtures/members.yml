@@ -50,3 +50,9 @@ football_admin:
   admin: true
   club: football
   user: michael
+
+hockey_admin:
+  balance: 9.99
+  admin: true
+  club: hockey
+  user: george

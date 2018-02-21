@@ -23,3 +23,7 @@ football:
   name: Football
   description: Football is the most popular sport in the world
 
+hockey:
+  name: Hockey
+  description: Hockey is the national game of Canada
+
