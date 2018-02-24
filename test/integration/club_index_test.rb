@@ -53,5 +53,13 @@ class ClubIndexTest < ActionDispatch::IntegrationTest
     assert_select 'ul.clubs' do
       assert_select 'a', text: 'join', count: 0
     end
+
+    # check that hockey shows on my clubs page
+    get my_clubs_path
+    assert_template 'clubs/my'
+    assert_select 'ul.clubs' do
+      assert_select 'li', html: /#{Regexp.quote(@hockey.name)}/
+    end
+
   end
 end

@@ -6,6 +6,11 @@ module ClubsHelper
     admin = User.find_by(id: member_admin.user_id)
   end
 
+  def user_club_admin?(user, club)
+    club_member = Member.find_by(user_id: user.id, club_id: club.id, admin: true)
+    club_member ? true : false
+  end
+
   def user_in_club?(user, club)
     club_member = Member.find_by(user_id: user.id, club_id: club.id)
     club_member ? true : false

@@ -1,0 +1,15 @@
+<% provide(:title, 'Club members') %>
+<h1>Members in <%= @club.name %></h1>
+
+<%= will_paginate @club_members%>
+
+<table class="club_members">
+  <tr>
+    <th>No.</th>
+    <th>Name</th>
+    <th>Balance</th>
+  </tr>
+  <%= render @club_members %>
+</table>
+
+<%= will_paginate @club_members %>

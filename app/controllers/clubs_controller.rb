@@ -1,8 +1,9 @@
 class ClubsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy, :my, :join]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy, :my, :join, :members]
   #before_action :correct_user, only: [:my]
-  before_action :club_exists, only: [:show, :edit, :update, :join]
+  before_action :club_exists, only: [:show, :edit, :update, :join, :members]
   before_action :club_admin, only: [:edit, :update]
+  before_action :user_in_club, only: [:members]
 
   def index
     @clubs = Club.all.paginate(page: params[:page])
@@ -36,6 +37,12 @@ class ClubsController < ApplicationController
 
   def show
   end
+
+  def members
+    @club_members = Member.where(club_id: @club.id).paginate(page: params[:page])
+  end
+
+  # TODO: show members of a club
 
   def edit
   end
@@ -86,5 +93,9 @@ class ClubsController < ApplicationController
   def club_admin
     admin = get_club_admin(@club)
     redirect_to(root_url) unless current_user?(admin)
+  end
+
+  def user_in_club
+    redirect_to(root_url) unless user_in_club?(current_user, @club)
   end
 end

@@ -66,6 +66,10 @@ Rails.application.routes.draw do
     member do
       post 'join'
     end
+
+    member do
+      get 'members'
+    end
   end
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
