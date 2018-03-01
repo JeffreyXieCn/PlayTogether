@@ -1,0 +1,44 @@
+<% provide(:title, @activity.name) %>
+<h1><%= link_to @activity.club.name, club_path(@activity.club) %> | Activity info</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <p>
+      <strong>Name:</strong>
+      <%= @activity.name %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @activity.description %>
+    </p>
+
+    <p>
+      <strong>Start time:</strong>
+      <%= @activity.start_time %>
+    </p>
+
+    <p>
+      <strong>End time:</strong>
+      <%= @activity.end_time %>
+    </p>
+
+    <p>
+      <strong>Where:</strong>
+      <%= @activity.where %>
+    </p>
+
+    <p>
+      <strong>Total cost:</strong>
+      <%= @activity.total_cost %>
+    </p>
+
+    <p>
+      <strong>Status:</strong>
+      <%= @activity.status %>
+    </p>
+
+    <%= link_to "view activities", club_activities_path(@activity.club) %>
+    <%= link_to "edit", edit_activity_path(@activity) %>
+
+  </div>
+</div>

@@ -9,7 +9,7 @@ class ClubsController < ApplicationController
     @clubs = Club.all.paginate(page: params[:page])
   end
 
-  def my
+  def my # show clubs I am a member of
     user = current_user
     @my_clubs = Club.joins(:members).where(members: {user_id: user.id}).paginate(page: params[:page])
   end
@@ -38,7 +38,7 @@ class ClubsController < ApplicationController
   def show
   end
 
-  def members
+  def members # show all club members
     @club_members = Member.where(club_id: @club.id).paginate(page: params[:page])
   end
 
@@ -57,7 +57,7 @@ class ClubsController < ApplicationController
     end
   end
 
-  def join
+  def join # join a club as a member
     # make sure the current user is not already in this club
     user = current_user
     member_exist = Member.find_by(user_id: user.id, club_id: @club.id)

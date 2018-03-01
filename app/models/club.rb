@@ -11,6 +11,7 @@
 
 class Club < ApplicationRecord
   has_many :members
+  has_many :activities
   validates :name,  presence: true, length: { maximum: 50 }
 
 end

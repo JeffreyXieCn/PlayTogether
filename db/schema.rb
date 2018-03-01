@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180217172940) do
+ActiveRecord::Schema.define(version: 20180224201935) do
+
+  create_table "activities", force: :cascade do |t|
+    t.integer "club_id"
+    t.string "name"
+    t.text "description"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string "where"
+    t.decimal "total_cost", precision: 10, scale: 2
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_activities_on_club_id"
+  end
 
   create_table "clubs", force: :cascade do |t|
     t.string "name"

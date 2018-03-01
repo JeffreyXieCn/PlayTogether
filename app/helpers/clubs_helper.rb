@@ -15,4 +15,6 @@ module ClubsHelper
     club_member = Member.find_by(user_id: user.id, club_id: club.id)
     club_member ? true : false
   end
+
+
 end

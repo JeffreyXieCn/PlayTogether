@@ -1,0 +1,42 @@
+# == Schema Information
+#
+# Table name: activities
+#
+#  id          :integer          not null, primary key
+#  club_id     :integer
+#  name        :string
+#  description :text
+#  start_time  :datetime
+#  end_time    :datetime
+#  where       :string
+#  total_cost  :decimal(10, 2)
+#  status      :integer          default("scheduled")
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+# Indexes
+#
+#  index_activities_on_club_id  (club_id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  club: one
+  name: MyString
+  description: MyText
+  start_time: 2018-02-24 15:19:35
+  end_time: 2018-02-24 15:19:35
+  where: MyString
+  total_cost: 9.99
+  status: MyString
+
+two:
+  club: two
+  name: MyString
+  description: MyText
+  start_time: 2018-02-24 15:19:35
+  end_time: 2018-02-24 15:19:35
+  where: MyString
+  total_cost: 9.99
+  status: MyString

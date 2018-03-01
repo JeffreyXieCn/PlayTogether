@@ -1,0 +1,8 @@
+<% provide(:title, 'Create an activity') %>
+<% provide(:button_text, 'Create activity') %>
+<h1><%= link_to @club.name, club_path(@club) %> | Create a new activity</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= render partial: 'form', locals: {target: club_activities_path(@club)} %>
+  </div>
+</div>

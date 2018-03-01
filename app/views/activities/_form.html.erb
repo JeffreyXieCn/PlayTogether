@@ -1,0 +1,23 @@
+<%= form_for(@activity, url: target) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, class: 'form-control' %>
+
+  <%= f.label :description %>
+  <%= f.text_area :description, class: 'form-control' %>
+
+  <%= f.label :start_time %>
+  <%= f.datetime_field :start_time, class: 'form-control' %>
+
+  <%= f.label :end_time %>
+  <%= f.datetime_field :end_time, class: 'form-control' %>
+
+  <%= f.label :where %>
+  <%= f.text_field :where, class: 'form-control' %>
+
+  <%= f.label :total_cost %>
+  <%= f.text_field :total_cost, class: 'form-control' %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>
