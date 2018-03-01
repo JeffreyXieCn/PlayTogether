@@ -9,7 +9,7 @@
 #  updated_at  :datetime         not null
 #
 
-class Club < ApplicationRecord
+class Club < ApplicationRecord # TODO: add club picture and club address
   has_many :members
   has_many :activities
   validates :name,  presence: true, length: { maximum: 50 }

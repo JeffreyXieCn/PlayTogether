@@ -15,8 +15,10 @@ class ClubEditTest < ActionDispatch::IntegrationTest
 
     assert_select 'ul.clubs' do
       assert_select 'li', 3
+      assert_select 'a[href=?]', club_path(@badminton), text: @badminton.name
     end
 
+    get club_path(@badminton)
     assert_select 'a[href=?]', edit_club_path(@badminton), text: 'edit'
 
     get edit_club_path(@badminton)

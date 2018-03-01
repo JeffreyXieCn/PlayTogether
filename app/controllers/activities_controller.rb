@@ -30,7 +30,7 @@ class ActivitiesController < ApplicationController
 
   end
 
-  def update # TODO: finish it
+  def update
     if @activity.update_attributes(activity_params)
       # Handle a successful update.
       flash[:success] = "Activity info updated"

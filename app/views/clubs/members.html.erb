@@ -1,5 +1,5 @@
 <% provide(:title, 'Club members') %>
-<h1>Members in <%= @club.name %></h1>
+<h1><%= link_to @club.name, club_path(@club) %> | Members</h1>
 
 <%= will_paginate @club_members%>
 
