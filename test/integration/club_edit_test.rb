@@ -16,10 +16,10 @@ class ClubEditTest < ActionDispatch::IntegrationTest
 
     get club_path(@basketball) # user is not the admin of this club
     assert_template 'clubs/show'
-    assert_select 'a[href=?]', edit_club_path(@basketball), text: 'edit', count: 0
+    assert_select 'a[href=?]', edit_club_path(@basketball), text: 'Edit', count: 0
 
     get club_path(@badminton)
-    assert_select 'a[href=?]', edit_club_path(@badminton), text: 'edit'
+    assert_select 'a[href=?]', edit_club_path(@badminton), text: 'Edit'
 
     get edit_club_path(@badminton)
 

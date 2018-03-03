@@ -16,5 +16,15 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
-  
+
+  def club_exists(club_id)
+    @club = Club.find(club_id)
+    redirect_to(root_url) unless @club
+  end
+
+  def club_admin
+    admin = get_club_admin(@club)
+    redirect_to(root_url) unless current_user?(admin)
+  end
+
 end

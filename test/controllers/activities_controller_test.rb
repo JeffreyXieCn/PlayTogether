@@ -24,9 +24,17 @@ class ActivitiesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_url
   end
 
-  test 'A logged in user can show an activity' do
+  test 'A logged in user can view an activity' do
     log_in_as(@other_user)
     get activity_path(@first_badminton)
     assert_response :success
   end
+
+  test 'should redirect new activity if not club admin' do
+    log_in_as(@other_user)
+    get new_club_activity_path(@badminton)
+    assert_redirected_to root_url
+  end
+
+
 end

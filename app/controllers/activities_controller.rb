@@ -1,6 +1,9 @@
 class ActivitiesController < ApplicationController
   before_action :logged_in_user, only: [:index, :new, :create, :show, :edit, :update]
-  before_action :club_exists, only: [:index, :new, :create]
+  before_action only: [:index, :new, :create] do
+    club_exists(params[:club_id])
+  end
+  before_action :club_admin, only: [:new, :create, :edit, :update]
   before_action :activity_exists, only: [:show, :edit, :update]
 
   def index
@@ -45,11 +48,6 @@ class ActivitiesController < ApplicationController
 
     def activity_params
       params.require(:activity).permit(:name, :description, :start_time, :end_time, :where, :total_cost)
-    end
-
-    def club_exists
-      @club = Club.find(params[:club_id])
-      redirect_to(root_url) unless @club
     end
 
     def activity_exists

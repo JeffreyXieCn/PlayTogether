@@ -21,7 +21,7 @@ class ClubMembersTest < ActionDispatch::IntegrationTest
 
     get club_path(@badminton)
     assert_template 'clubs/show'
-    assert_select 'a', text: 'view members', count: 1
+    assert_select 'a', text: 'View members', count: 1
     get members_club_path(@badminton)
     assert_template 'clubs/members'
   end
@@ -29,7 +29,7 @@ class ClubMembersTest < ActionDispatch::IntegrationTest
   test 'a logged in member of a club can view all the members of that club' do
     log_in_as(@user)
     get club_path(@basketball)
-    assert_select 'a', text: 'view members', count: 1
+    assert_select 'a', text: 'View members', count: 1
 
     get members_club_path(@basketball)
     assert_template 'clubs/members'
@@ -51,7 +51,7 @@ class ClubMembersTest < ActionDispatch::IntegrationTest
 
     get club_path(@hockey)
     assert_template 'clubs/show'
-    assert_select 'a', text: 'join', count: 1
+    assert_select 'a', text: 'Join', count: 1
 
     assert_difference 'Member.where(club_id: @hockey.id).count', 1 do
       post join_club_path(@hockey)
@@ -63,7 +63,7 @@ class ClubMembersTest < ActionDispatch::IntegrationTest
     assert_not_empty 'div.alert.alert-success'
 
     # check that there is no more link to join
-    assert_select 'a', text: 'join', count: 0
+    assert_select 'a', text: 'Join', count: 0
 
     # check that hockey shows on my clubs page
     get my_clubs_path
