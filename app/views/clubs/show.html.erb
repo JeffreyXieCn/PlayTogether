@@ -15,7 +15,7 @@
     <% if current_user && (! user_in_club?(current_user, @club)) %>
       <%= link_to "join", join_club_path(@club), method: :post %>
     <% end %>
-    <% if current_user && (user_in_club?(current_user, @club)) %>
+    <% if current_user %>
       <%= link_to "view members", members_club_path(@club) %>
       <%= link_to "view activities", club_activities_path(@club) %>
     <% end %>

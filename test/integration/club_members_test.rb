@@ -7,9 +7,11 @@ class ClubMembersTest < ActionDispatch::IntegrationTest
     @basketball = clubs(:basketball)
     @clubs_num = Club.count
     @hockey = clubs(:hockey)
+    @other_user = users(:archer)
   end
 
-  test "Non-logged in visitor can't view the members of a club" do
+  test 'a logged in user can view the members of a club' do
+    log_in_as(@other_user)
     get clubs_path
     assert_template 'clubs/index'
 
@@ -19,10 +21,12 @@ class ClubMembersTest < ActionDispatch::IntegrationTest
 
     get club_path(@badminton)
     assert_template 'clubs/show'
-    assert_select 'a', text: 'view members', count: 0
+    assert_select 'a', text: 'view members', count: 1
+    get members_club_path(@badminton)
+    assert_template 'clubs/members'
   end
 
-  test "A logged in member of a club can view all the members of that club" do
+  test 'a logged in member of a club can view all the members of that club' do
     log_in_as(@user)
     get club_path(@basketball)
     assert_select 'a', text: 'view members', count: 1
@@ -33,6 +37,39 @@ class ClubMembersTest < ActionDispatch::IntegrationTest
     members_count = @basketball.members.count
     assert_select 'table.club_members' do
       assert_select 'tr', count: members_count + 1 # there is a header row for this table
+    end
+
+  end
+
+  test 'Logged in user should be able to join a club if he is not already a member' do
+    log_in_as(@user)
+    get clubs_path
+    assert_template 'clubs/index'
+    assert_select 'ul.clubs' do
+      assert_select 'a', text: @hockey.name, count: 1
+    end
+
+    get club_path(@hockey)
+    assert_template 'clubs/show'
+    assert_select 'a', text: 'join', count: 1
+
+    assert_difference 'Member.where(club_id: @hockey.id).count', 1 do
+      post join_club_path(@hockey)
+    end
+
+    assert_redirected_to @hockey
+    follow_redirect!
+    assert_not flash.empty?
+    assert_not_empty 'div.alert.alert-success'
+
+    # check that there is no more link to join
+    assert_select 'a', text: 'join', count: 0
+
+    # check that hockey shows on my clubs page
+    get my_clubs_path
+    assert_template 'clubs/my'
+    assert_select 'ul.clubs' do
+      assert_select 'li', html: /#{Regexp.quote(@hockey.name)}/
     end
 
   end

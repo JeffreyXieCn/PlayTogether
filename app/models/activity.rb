@@ -23,5 +23,5 @@ class Activity < ApplicationRecord
   belongs_to :club
   enum status: [:scheduled, :proposed, :completed, :cancelled]
 
-  default_scope -> { order(start_time: :desc) } # TODO: add test for this
+  default_scope -> { order(start_time: :asc) } # show the next upcoming activity on the top
 end

@@ -21,22 +21,22 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  club: one
-  name: MyString
-  description: MyText
-  start_time: 2018-02-24 15:19:35
-  end_time: 2018-02-24 15:19:35
-  where: MyString
-  total_cost: 9.99
-  status: MyString
+second_badminton:
+  club: badminton
+  name: Saturday night badminton
+  description: Let's play it again, guys
+  start_time: 2018-03-10 19:00:00
+  end_time: 2018-03-10 20:00:00
+  where: 'Sports Complex, court #2'
+  total_cost: 8.0
 
-two:
-  club: two
-  name: MyString
-  description: MyText
-  start_time: 2018-02-24 15:19:35
-  end_time: 2018-02-24 15:19:35
-  where: MyString
-  total_cost: 9.99
-  status: MyString
+first_badminton:
+  club: badminton
+  name: Saturday night badminton
+  description: Come out and play
+  start_time: 2018-03-03 19:00:00
+  end_time: 2018-03-03 20:00:00
+  where: 'Sports Complex, court #1'
+  total_cost: 8.0
+
+

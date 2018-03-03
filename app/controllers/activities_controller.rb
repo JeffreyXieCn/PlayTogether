@@ -1,4 +1,5 @@
 class ActivitiesController < ApplicationController
+  before_action :logged_in_user, only: [:index, :new, :create, :show, :edit, :update]
   before_action :club_exists, only: [:index, :new, :create]
   before_action :activity_exists, only: [:show, :edit, :update]
 

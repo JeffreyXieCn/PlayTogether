@@ -1,9 +1,9 @@
 class ClubsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy, :my, :join, :members]
+  before_action :logged_in_user, only: [:index, :new, :create, :edit, :update, :destroy, :my, :join, :members]
   #before_action :correct_user, only: [:my]
   before_action :club_exists, only: [:show, :edit, :update, :join, :members]
   before_action :club_admin, only: [:edit, :update]
-  before_action :user_in_club, only: [:members]
+  #before_action :user_in_club, only: [:members]
 
   def index
     @clubs = Club.all.paginate(page: params[:page])

@@ -22,7 +22,16 @@
 require 'test_helper'
 
 class ActivityTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+    @first_badminton = activities(:first_badminton)
+    @badminton = @first_badminton.club
+  end
+
+  test 'By default a new activity should have status scheduled' do
+    assert_equal 'scheduled', @first_badminton.status
+  end
+
+  test 'order should be the next upcoming activity on the top' do
+    assert_equal @first_badminton, @badminton.activities.first
+  end
 end
