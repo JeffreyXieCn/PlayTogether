@@ -1,10 +1,16 @@
 class ActivitiesController < ApplicationController
-  before_action :logged_in_user, only: [:index, :new, :create, :show, :edit, :update]
+  before_action :logged_in_user, only: [:index, :new, :create, :show, :edit, :update, :attend, :quit]
   before_action only: [:index, :new, :create] do
     club_exists(params[:club_id])
   end
-  before_action :club_admin, only: [:new, :create, :edit, :update]
-  before_action :activity_exists, only: [:show, :edit, :update]
+  before_action :activity_exists, only: [:show, :edit, :update, :attend, :quit, :cancel, :complete]
+  before_action only: [:edit, :update, :cancel, :complete] do
+    club_exists(@activity.club.id)
+  end
+  before_action :club_admin, only: [:new, :create, :edit, :update, :cancel, :complete] # TODO: :edit, :cancel is not working
+  before_action only: [:attend, :quit] do
+    redirect_to(root_url) unless user_in_club?(current_user, @activity.club)
+  end
 
   def index
     @activities = Activity.where(club_id: params[:club_id]).paginate(page: params[:page])
@@ -18,7 +24,7 @@ class ActivitiesController < ApplicationController
   def create
     @activity = @club.activities.build(activity_params)
     if @activity.save
-      flash[:success] = "Activity created!"
+      flash[:success] = 'Activity created!'
       redirect_to @activity
     else
       render 'new'
@@ -27,7 +33,7 @@ class ActivitiesController < ApplicationController
 
 
   def show
-
+    @players = @activity.players
   end
 
   def edit
@@ -37,11 +43,49 @@ class ActivitiesController < ApplicationController
   def update
     if @activity.update_attributes(activity_params)
       # Handle a successful update.
-      flash[:success] = "Activity info updated"
+      flash[:success] = 'Activity info updated'
       redirect_to @activity
     else
       render 'edit'
     end
+  end
+
+  def attend
+    player = @activity.players.build
+    player.user = current_user
+    player.save
+    flash[:success] = 'You are in!'
+    redirect_to @activity
+  end
+
+  def quit
+    player = Player.find_by(user_id: current_user.id, activity_id: @activity.id)
+    if player
+      player.destroy
+      flash[:success] = 'You quited from this activity'
+    end
+    redirect_to @activity
+  end
+
+  def cancel
+    # for now, just mark the status of the activity to "cancelled"
+    @activity.update_attributes(status: 'cancelled')
+    flash[:success] = 'This activity is now cancelled'
+    redirect_to @activity
+  end
+
+  def complete
+    @activity.update_attributes(status: 'completed')
+    players = @activity.players
+    average_cost = (@activity.total_cost.to_f / players.count).round(2)
+    players.each do |player|
+      player.update_attributes(cost: average_cost)
+      member = Member.find_by(user_id: player.user.id, club_id: @activity.club.id)
+      new_balance = member.balance - average_cost
+      member.update_attributes(balance: new_balance)
+    end
+    flash[:success] = "This activity is now completed, and each player is charged #{average_cost}"
+    redirect_to @activity
   end
 
   private

@@ -8,10 +8,20 @@
       </h1>
     </section>
   </aside>
+
+  <div class="col-md-8">
+    <% if @user.members.any? %>
+      <h3>My clubs: <%= @user.members.count %></h3>
+      <table class="user_memberships">
+        <tr>
+          <th>No.</th>
+          <th>Club</th>
+          <th>Balance</th>
+        </tr>
+        <% @user.members.all.each_with_index do |member, index| %>
+          <%= render partial: 'users/membership', locals:{member: member, index: index} %>
+        <% end %>
+      </table>
+    <% end %>
+  </div>
 </div>
-<% if false %>
-    <%= @user.name %>, <%= @user.email %><br>
-    Created at: <%= @user.created_at %><br>
-    Updated at: <%= @user.updated_at %><br>
-    Time now is: <%= Time.now %>
-<% end %>

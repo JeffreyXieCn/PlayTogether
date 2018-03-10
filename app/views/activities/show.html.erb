@@ -2,6 +2,7 @@
 <h1><%= link_to @activity.club.name, club_path(@activity.club) %> | Activity info</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+    <%= link_to "Back to activities", club_activities_path(@activity.club) %>
     <p>
       <strong>Name:</strong>
       <%= @activity.name %>
@@ -37,8 +38,43 @@
       <%= @activity.status %>
     </p>
 
-    <%= link_to "view activities", club_activities_path(@activity.club) %>
-    <%= link_to "edit", edit_activity_path(@activity) %>
+    <% if @activity.scheduled? %>
+      <% if current_user && user_in_club?(current_user, @activity.club) %>
+        <% if player?(current_user, @activity) %>
+          <%= link_to "Quit", quit_activity_path(@activity), method: :post %>
+        <% else %>
+          <%= link_to "Attend", attend_activity_path(@activity), method: :post %>
+        <% end %>
+      <% end %>
 
+      <% if current_user && user_club_admin?(current_user, @activity.club) %>
+        <%= link_to "Edit", edit_activity_path(@activity) %>
+        <%= link_to "Cancel activity", cancel_activity_path(@activity),
+                                       method: :post, data: {confirm: "You sure? This can't be undone"}%>
+        <%= link_to "Complete and charge", complete_activity_path(@activity), method: :post %>
+      <% end %>
+    <% end %>
+
+  </div>
+
+  <div class="col-md-6 col-md-offset-3">
+    <h2>Registered players:</h2>
+    <% if @players && @players.count == 0 %>
+      <p>Currently there is no players for this activity</p>
+    <% else %>
+      <p>Total: <%= @players.count %></p>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Cost</th>
+        </tr>
+        <% @players.each do |player| %>
+          <tr>
+            <td><%= player.user.name%></td>
+            <td><%= player.cost%></td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
   </div>
 </div>

@@ -3,10 +3,15 @@
 <% if current_user && user_club_admin?(current_user, @club)%>
   <%= link_to "New activity", new_club_activity_path(@club) %>
 <% end %>
-<%= will_paginate %>
 
-<ul class="activities">
-  <%= render @activities %>
-</ul>
+<% if @activities && @activities.count == 0 %>
+  <p>Currently there is no activities for this club</p>
+<% else %>
+  <%= will_paginate %>
 
-<%= will_paginate %>
+  <ul class="activities">
+    <%= render @activities %>
+  </ul>
+
+  <%= will_paginate %>
+<% end %>

@@ -41,6 +41,16 @@
 #                         PATCH  /clubs/:id(.:format)                     clubs#update
 #                         PUT    /clubs/:id(.:format)                     clubs#update
 #                         DELETE /clubs/:id(.:format)                     clubs#destroy
+#         attend_activity POST   /activities/:id/attend(.:format)         activities#attend
+#           quit_activity POST   /activities/:id/quit(.:format)           activities#quit
+#              activities GET    /activities(.:format)                    activities#index
+#                         POST   /activities(.:format)                    activities#create
+#            new_activity GET    /activities/new(.:format)                activities#new
+#                         GET    /activities/:id/edit(.:format)           activities#edit
+#                         GET    /activities/:id(.:format)                activities#show
+#                         PATCH  /activities/:id(.:format)                activities#update
+#                         PUT    /activities/:id(.:format)                activities#update
+#                         DELETE /activities/:id(.:format)                activities#destroy
 # edit_account_activation GET    /account_activations/:id/edit(.:format)  account_activations#edit
 #         password_resets POST   /password_resets(.:format)               password_resets#create
 #      new_password_reset GET    /password_resets/new(.:format)           password_resets#new
@@ -82,6 +92,24 @@ Rails.application.routes.draw do
     end
 
     resources :activities, shallow: true
+  end
+
+  resources :activities do
+    member do
+      post 'attend' # a member attends an activity
+    end
+
+    member do
+      post 'quit' # a player quits from an activity
+    end
+
+    member do
+      post 'cancel' # admin cancels an activity
+    end
+
+    member do
+      post 'complete' # the activity is successfully held, players will be charged
+    end
   end
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]

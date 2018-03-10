@@ -12,8 +12,9 @@
 #
 # Indexes
 #
-#  index_members_on_club_id  (club_id)
-#  index_members_on_user_id  (user_id)
+#  index_members_on_club_id              (club_id)
+#  index_members_on_user_id              (user_id)
+#  index_members_on_user_id_and_club_id  (user_id,club_id) UNIQUE
 #
 
 require 'test_helper'

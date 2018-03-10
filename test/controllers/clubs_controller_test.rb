@@ -21,6 +21,13 @@ class ClubsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_url
   end
 
+  test "should redirect create when not logged in" do
+    assert_no_difference 'Club.count' do
+      post clubs_path, params: { club: { name: "New club", description:"My club description" } }
+    end
+    assert_redirected_to login_url
+  end
+
   test "should redirect my clubs when not logged in" do
     get my_clubs_path
     assert_not flash.empty?

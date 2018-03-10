@@ -62,7 +62,7 @@ class ClubsController < ApplicationController
   def join # join a club as a member
     # make sure the current user is not already in this club
     user = current_user
-    member_exist = Member.find_by(user_id: user.id, club_id: @club.id)
+    member_exist = Member.find_by(user_id: user.id, club_id: @club.id) # TODO: test can't join the same club twice
     if member_exist
       flash[:warning] = 'You are already in this club'
     else

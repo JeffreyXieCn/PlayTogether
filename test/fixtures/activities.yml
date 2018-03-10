@@ -16,7 +16,8 @@
 #
 # Indexes
 #
-#  index_activities_on_club_id  (club_id)
+#  index_activities_on_club_id                 (club_id)
+#  index_activities_on_club_id_and_start_time  (club_id,start_time)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

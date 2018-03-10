@@ -72,5 +72,9 @@ class ClubMembersTest < ActionDispatch::IntegrationTest
       assert_select 'li', html: /#{Regexp.quote(@hockey.name)}/
     end
 
+    # check that the Join link disappears
+    get club_path(@hockey)
+    assert_select 'a', text: 'Join', count: 0
+
   end
 end

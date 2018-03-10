@@ -16,11 +16,13 @@
 #
 # Indexes
 #
-#  index_activities_on_club_id  (club_id)
+#  index_activities_on_club_id                 (club_id)
+#  index_activities_on_club_id_and_start_time  (club_id,start_time)
 #
 
 class Activity < ApplicationRecord
   belongs_to :club
+  has_many :players
   enum status: [:scheduled, :proposed, :completed, :cancelled]
 
   default_scope -> { order(start_time: :asc) } # show the next upcoming activity on the top

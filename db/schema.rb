@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180224201935) do
+ActiveRecord::Schema.define(version: 20180304231812) do
 
   create_table "activities", force: :cascade do |t|
     t.integer "club_id"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20180224201935) do
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["club_id", "start_time"], name: "index_activities_on_club_id_and_start_time"
     t.index ["club_id"], name: "index_activities_on_club_id"
   end
 
@@ -41,7 +42,18 @@ ActiveRecord::Schema.define(version: 20180224201935) do
     t.integer "user_id"
     t.integer "club_id"
     t.index ["club_id"], name: "index_members_on_club_id"
+    t.index ["user_id", "club_id"], name: "index_members_on_user_id_and_club_id", unique: true
     t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "activity_id"
+    t.decimal "cost", precision: 10, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_players_on_activity_id"
+    t.index ["user_id"], name: "index_players_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
