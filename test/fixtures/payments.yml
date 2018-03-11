@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: payments
+#
+#  id         :integer          not null, primary key
+#  member_id  :integer
+#  amount     :decimal(10, 2)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_payments_on_member_id  (member_id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  member: one
+  'amount: MyString
+  decimal{10,2}': MyString
+
+two:
+  member: two
+  'amount: MyString
+  decimal{10,2}': MyString

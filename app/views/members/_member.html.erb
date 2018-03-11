@@ -2,4 +2,13 @@
   <td><%= member_counter + 1%></td>
   <td><%= member.user.name%></td>
   <td><%= member.balance%></td>
+  <td>
+    <% if current_user && user_club_admin?(current_user, @club) %>
+      <div>
+        <%= form_for(member.payments.build, url: pay_club_path(@club), html: {method: :post}) do |f| %>
+          <%= f.submit "Pay", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    <% end %>
+  </td>
 </tr>

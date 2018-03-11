@@ -91,6 +91,10 @@ Rails.application.routes.draw do
       get 'members' # list the members of a club
     end
 
+    member do
+      post 'pay'
+    end
+
     resources :activities, shallow: true
   end
 
