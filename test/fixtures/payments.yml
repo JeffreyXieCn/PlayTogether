@@ -16,11 +16,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  member: one
-  'amount: MyString
-  decimal{10,2}': MyString
+  member: badminton_admin
+  amount: 20
 
 two:
-  member: two
-  'amount: MyString
-  decimal{10,2}': MyString
+  member: basketball_member_michael
+  amount: 20
