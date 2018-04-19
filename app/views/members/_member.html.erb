@@ -4,11 +4,19 @@
   <td><%= member.balance%></td>
   <td>
     <% if current_user && user_club_admin?(current_user, @club) %>
-      <div>
-        <%= form_for(member.payments.build, url: pay_club_path(@club), html: {method: :post}) do |f| %>
-          <%= f.submit "Pay", class: "btn btn-primary" %>
-        <% end %>
-      </div>
+      <%= form_for(member.payments.build, url: pay_club_path(@club), html: {method: :post}) do |f| %>
+        <ul class="hypers">
+          <li class="d-inline-block">
+            <%= f.hidden_field :member_id, value: member.id %>
+          </li>
+          <li class="d-inline-block">
+            <%= f.text_field :amount, placeholder: "Amount" %>
+          </li>
+          <li class="d-inline-block">
+            <%= f.submit "Recharge", class: "btn btn-primary" %>
+          </li>
+        </ul>
+      <% end %>
     <% end %>
   </td>
 </tr>

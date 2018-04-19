@@ -20,5 +20,5 @@
 class Member < ApplicationRecord
   belongs_to :user
   belongs_to :club
-  has_many :payment
+  has_many :payments
 end

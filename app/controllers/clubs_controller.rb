@@ -1,7 +1,7 @@
 class ClubsController < ApplicationController
   before_action :logged_in_user, only: [:index, :new, :create, :edit, :update, :destroy, :my, :join, :members]
   #before_action :correct_user, only: [:my]
-  before_action only: [:show, :edit, :update, :join, :members] do
+  before_action only: [:show, :edit, :update, :join, :members, :pay] do
     club_exists(params[:id])
   end
   before_action :club_admin, only: [:edit, :update]
@@ -40,7 +40,8 @@ class ClubsController < ApplicationController
   def show
   end
 
-  def members # show all club members
+  # show all club members
+  def members
     @club_members = Member.where(club_id: @club.id).paginate(page: params[:page])
   end
 
@@ -76,6 +77,15 @@ class ClubsController < ApplicationController
     redirect_to @club
   end
 
+  def pay
+    payment = Payment.new(payment_params)
+    payment.save
+    member = payment.member
+    member_balance = member.balance + payment.amount
+    member.update_attribute(:balance, member_balance)
+    redirect_to members_club_path(@club)
+  end
+
   def destroy
 
   end
@@ -85,6 +95,10 @@ class ClubsController < ApplicationController
   def club_params
     #debugger
     params.require(:club).permit(:name, :description)
+  end
+
+  def payment_params
+    params.require(:payment).permit(:member_id, :amount)
   end
 
   def user_in_club

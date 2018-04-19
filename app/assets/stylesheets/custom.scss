@@ -203,3 +203,15 @@ input {
     border-bottom: 1px solid $gray-lighter;
   }
 }
+
+.hypers {
+  display: table;
+  postion: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.d-inline-block {
+  display: inline-block!important;
+  margin-left: 20px;
+}
