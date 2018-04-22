@@ -40,4 +40,21 @@ first_badminton:
   where: 'Sports Complex, court #1'
   total_cost: 8.0
 
+second_basketball:
+  club: basketball
+  name: Our second basketball game
+  description: Let's play it again, guys
+  start_time: <%= Time.now + 14.days %>
+  end_time: <%= Time.now + 14.days + 1.hour %>
+  where: 'Sports Complex, court #2'
+  total_cost: 10.0
+
+first_basketball:
+  club: basketball
+  name: Our first basketball game
+  description: Come out and play
+  start_time: <%= Time.now + 7.days %>
+  end_time: <%= Time.now + 7.days + 1.hour %>
+  where: 'Sports Complex, court #1'
+  total_cost: 10.0
 

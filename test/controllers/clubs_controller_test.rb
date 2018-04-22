@@ -28,12 +28,6 @@ class ClubsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_url
   end
 
-  test "should redirect my clubs when not logged in" do
-    get my_clubs_path
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
   test "should redirect edit when not logged in" do
     get edit_club_path(@badminton)
     assert_not flash.empty?

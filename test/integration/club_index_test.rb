@@ -20,10 +20,10 @@ class ClubIndexTest < ActionDispatch::IntegrationTest
 
   test 'Logged in user can see the clubs he joined' do
     log_in_as(@user)
-    get my_clubs_path
-    assert_template 'clubs/my'
-    assert_select 'ul.clubs' do
-      assert_select 'li', 3
+    get user_path(@user)
+    assert_template 'users/show'
+    assert_select 'h3', text: 'My clubs: 3'
+    assert_select 'table.user_memberships' do
       assert_select 'a[href=?]', club_path(@badminton), text: @badminton.name
       assert_select 'a[href=?]', club_path(@basketball), text: @basketball.name
       assert_select 'a[href=?]', club_path(@football), text: @football.name

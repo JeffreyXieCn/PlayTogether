@@ -10,9 +10,9 @@ class ClubEditTest < ActionDispatch::IntegrationTest
   test "a club admin can edit club info" do
     log_in_as(@user)
     get root_path
-    assert_select 'a[href=?]', my_clubs_path, count: 1
-    get my_clubs_path
-    assert_template 'clubs/my'
+    assert_select 'a[href=?]', user_path(@user), count: 1
+    get user_path(@user)
+    assert_template 'users/show'
 
     get club_path(@basketball) # user is not the admin of this club
     assert_template 'clubs/show'

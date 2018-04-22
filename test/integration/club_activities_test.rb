@@ -8,6 +8,7 @@ class ClubActivitiesTest < ActionDispatch::IntegrationTest
     @clubs_num = Club.count
     @hockey = clubs(:hockey)
     @other_user = users(:archer)
+    @first_basketball = activities(:first_basketball)
   end
 
   test 'a logged in user can view the activities of a club' do
@@ -52,6 +53,43 @@ class ClubActivitiesTest < ActionDispatch::IntegrationTest
       post club_activities_path(@badminton), params: {activity: {name: name,
                                                                  description: description, start_time: start_time,
                                                                  end_time: end_time, where: where, total_cost: total_cost}}
+    end
+
+  end
+
+  test "a member can attend a club's activity" do
+    log_in_as(@user)
+    get user_path(@user)
+    assert_template 'users/show'
+    assert_select 'a', text: @basketball.name, count: 1
+
+    get club_path(@basketball)
+    assert_select 'a[href=?]', club_activities_path(@basketball)
+
+    get club_activities_path(@basketball)
+    assert_select 'a[href=?]', activity_path(@first_basketball), text: @first_basketball.name
+
+    get activity_path(@first_basketball)
+    assert_select 'a[href=?]', attend_activity_path(@first_basketball), text: 'Attend'
+
+    assert_difference '@first_basketball.players.count', 1 do
+      post attend_activity_path(@first_basketball)
+    end
+
+    assert_redirected_to activity_path(@first_basketball)
+    follow_redirect!
+
+    assert_select 'a', text: 'Attend', count: 0
+    assert_select 'a', text: 'Quit', count: 1
+
+    assert_select 'table.activity-players' do
+      assert_select 'td', text: @user.name
+    end
+
+    # assume the attended activity shows up in profile page
+    get user_path(@user)
+    assert_select 'ul.activities' do
+      assert_select 'a[href=?]', activity_path(@first_basketball), text: @first_basketball.name
     end
 
   end

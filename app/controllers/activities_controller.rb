@@ -13,6 +13,7 @@ class ActivitiesController < ApplicationController
   end
 
   def index
+    #TODO show upcoming activities and cancelled/finished activities in seperate tabs
     @activities = Activity.where(club_id: params[:club_id]).paginate(page: params[:page])
   end
 

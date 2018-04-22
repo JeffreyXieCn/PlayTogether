@@ -1,6 +1,5 @@
 class ClubsController < ApplicationController
-  before_action :logged_in_user, only: [:index, :new, :create, :edit, :update, :destroy, :my, :join, :members]
-  #before_action :correct_user, only: [:my]
+  before_action :logged_in_user, only: [:index, :new, :create, :edit, :update, :destroy, :join, :members]
   before_action only: [:show, :edit, :update, :join, :members, :pay] do
     club_exists(params[:id])
   end
@@ -9,11 +8,6 @@ class ClubsController < ApplicationController
 
   def index
     @clubs = Club.all.paginate(page: params[:page])
-  end
-
-  def my # show clubs I am a member of
-    user = current_user
-    @my_clubs = Club.joins(:members).where(members: {user_id: user.id}).paginate(page: params[:page])
   end
 
   def new

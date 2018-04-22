@@ -65,11 +65,11 @@ class ClubMembersTest < ActionDispatch::IntegrationTest
     # check that there is no more link to join
     assert_select 'a', text: 'Join', count: 0
 
-    # check that hockey shows on my clubs page
-    get my_clubs_path
-    assert_template 'clubs/my'
-    assert_select 'ul.clubs' do
-      assert_select 'li', html: /#{Regexp.quote(@hockey.name)}/
+    # check that hockey shows on my profile page
+    get user_path(@user)
+    assert_template 'users/show'
+    assert_select 'table.user_memberships' do
+      assert_select 'td', html: /#{Regexp.quote(@hockey.name)}/
     end
 
     # check that the Join link disappears

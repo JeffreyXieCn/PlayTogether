@@ -6,9 +6,9 @@
 #            sessions_new GET    /sessions/new(.:format)                  sessions#new
 #               users_new GET    /users/new(.:format)                     users#new
 #                    root GET    /                                        static_pages#home
-#                    help GET    /help(.:format)                          static_pages#help
 #                   about GET    /about(.:format)                         static_pages#about
 #                 contact GET    /contact(.:format)                       static_pages#contact
+#                 history GET    /history(.:format)                       static_pages#history
 #                  signup GET    /signup(.:format)                        users#new
 #                         POST   /signup(.:format)                        users#create
 #                   login GET    /login(.:format)                         sessions#new
@@ -22,9 +22,9 @@
 #                         PATCH  /users/:id(.:format)                     users#update
 #                         PUT    /users/:id(.:format)                     users#update
 #                         DELETE /users/:id(.:format)                     users#destroy
-#                my_clubs GET    /clubs/my(.:format)                      clubs#my
 #               join_club POST   /clubs/:id/join(.:format)                clubs#join
 #            members_club GET    /clubs/:id/members(.:format)             clubs#members
+#                pay_club POST   /clubs/:id/pay(.:format)                 clubs#pay
 #         club_activities GET    /clubs/:club_id/activities(.:format)     activities#index
 #                         POST   /clubs/:club_id/activities(.:format)     activities#create
 #       new_club_activity GET    /clubs/:club_id/activities/new(.:format) activities#new
@@ -43,6 +43,8 @@
 #                         DELETE /clubs/:id(.:format)                     clubs#destroy
 #         attend_activity POST   /activities/:id/attend(.:format)         activities#attend
 #           quit_activity POST   /activities/:id/quit(.:format)           activities#quit
+#         cancel_activity POST   /activities/:id/cancel(.:format)         activities#cancel
+#       complete_activity POST   /activities/:id/complete(.:format)       activities#complete
 #              activities GET    /activities(.:format)                    activities#index
 #                         POST   /activities(.:format)                    activities#create
 #            new_activity GET    /activities/new(.:format)                activities#new
@@ -69,7 +71,6 @@ Rails.application.routes.draw do
   get 'users/new'
 
   root 'static_pages#home'
-  get  '/help',    to: 'static_pages#help'
   get  '/about',   to: 'static_pages#about'
   get  '/contact', to: 'static_pages#contact'
   get  '/history', to: 'static_pages#history'
@@ -80,10 +81,6 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   resources :users
   resources :clubs do
-    collection do
-      get 'my' # list the clubs that I am a member
-    end
-
     member do
       post 'join' # join a club
     end
@@ -119,4 +116,5 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # On command line, use this command to annotate the routes: bundle exec annotate --routes
 end

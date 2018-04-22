@@ -23,5 +23,11 @@
         <% end %>
       </table>
     <% end %>
+    <% if @upcoming_activities.any? %>
+      <h3>My upcoming activities:</h3>
+      <ul class="activities">
+        <%= render @upcoming_activities %>
+      </ul>
+    <% end %>
   </div>
 </div>
