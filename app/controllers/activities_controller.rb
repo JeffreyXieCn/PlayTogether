@@ -13,7 +13,7 @@ class ActivitiesController < ApplicationController
   end
 
   def index
-    #TODO show upcoming activities and cancelled/finished activities in seperate tabs
+    #TODO show upcoming activities and cancelled/finished activities in seperate tabs using Bootstrap nav nav-tabs
     @activities = Activity.where(club_id: params[:club_id]).paginate(page: params[:page])
   end
 

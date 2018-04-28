@@ -1,6 +1,13 @@
 <% provide(:title, 'Club members') %>
 <h1><%= link_to @club.name, club_path(@club) %> | Members</h1>
 
+<% if false %>
+<ol class="breadcrumb breadcrumb-lg">
+  <li><%= link_to @club.name, club_path(@club) %></li>
+  <li class="active">Members</li>
+</ol>
+<% end %>
+
 <%= will_paginate @club_members%>
 
 <table class="club_members">

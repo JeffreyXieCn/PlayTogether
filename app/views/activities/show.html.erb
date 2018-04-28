@@ -61,21 +61,24 @@
 
   <div class="col-md-6 col-md-offset-3">
     <% if @players && @players.count == 0 %>
-      <h3 class="bg-primary">Currently there is no players for this activity</h3>
+      <div class="alert alert-warning" role="alert">Currently there is no players for this activity</div>
     <% else %>
-      <h3 class="bg-primary">Registered players: <%= @players.count %></h3>
-      <table class="activity-players">
-        <tr>
-          <th>Name</th>
-          <th>Cost</th>
-        </tr>
-        <% @players.each do |player| %>
+      <div class="panel panel-primary">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Registered players: <%= @players.count %></div>
+        <table class="activity-players">
           <tr>
-            <td><%= player.user.name%></td>
-            <td><%= player.cost%></td>
+            <th>Name</th>
+            <th>Cost</th>
           </tr>
-        <% end %>
-      </table>
+          <% @players.each do |player| %>
+            <tr>
+              <td><%= player.user.name%></td>
+              <td><%= player.cost%></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
     <% end %>
   </div>
 </div>

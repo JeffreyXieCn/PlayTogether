@@ -5,9 +5,12 @@
   <td>
     <% if current_user && user_club_admin?(current_user, @club) %>
       <%= form_for(member.payments.build, url: pay_club_path(@club), html: {method: :post, class: "form-inline"}) do |f| %>
-            <%= f.hidden_field :member_id, value: member.id %>
-            <%= f.text_field :amount, class: "form-control", placeholder: "Amount" %>
-            <%= f.submit "Recharge", class: "form-control btn btn-primary" %>
+        <%= f.hidden_field :member_id, value: member.id %>
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+          <%= f.text_field :amount, class: "form-control", size: "4", placeholder: "0.00" %>
+        </div>
+        <%= f.submit "Recharge", class: "form-control btn btn-primary" %>
       <% end %>
     <% end %>
   </td>

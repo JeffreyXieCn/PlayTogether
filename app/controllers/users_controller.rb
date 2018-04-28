@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     redirect_to root_url unless @user && @user.activated?
     #end
     #debugger #this will work even if running rails test
+    # TODO consider using Bootstrap Accordion to show upcoming activities
     #@upcoming_activities = Activity.joins(:players).where(players: {user_id: @user.id}, activities: {})
     @upcoming_activities = Activity.joins(:players).where('players.user_id = ? and activities.start_time >= ?',
                                                           @user.id, Time.current)

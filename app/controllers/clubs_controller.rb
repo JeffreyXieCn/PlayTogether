@@ -7,6 +7,7 @@ class ClubsController < ApplicationController
   #before_action :user_in_club, only: [:members]
 
   def index
+    # TODO use Bootstrap thumbnails with custom content to show clubs in grids
     @clubs = Club.all.paginate(page: params[:page])
   end
 
@@ -38,8 +39,6 @@ class ClubsController < ApplicationController
   def members
     @club_members = Member.where(club_id: @club.id).paginate(page: params[:page])
   end
-
-  # TODO: show members of a club
 
   def edit
   end

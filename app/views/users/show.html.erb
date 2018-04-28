@@ -11,23 +11,29 @@
 
   <div class="col-md-8">
     <% if @user.members.any? %>
-      <h3 class="bg-primary">My clubs: <%= @user.members.count %></h3>
-      <table class="user_memberships">
-        <tr>
-          <th>No.</th>
-          <th>Club</th>
-          <th>Balance</th>
-        </tr>
-        <% @user.members.all.each_with_index do |member, index| %>
-          <%= render partial: 'users/membership', locals:{member: member, index: index} %>
-        <% end %>
-      </table>
+      <div class="panel panel-primary">
+        <!-- Default panel contents -->
+        <div class="panel-heading">My clubs: <%= @user.members.count %></div>
+        <table class="user_memberships">
+          <tr>
+            <th>No.</th>
+            <th>Club</th>
+            <th>Balance</th>
+          </tr>
+          <% @user.members.all.each_with_index do |member, index| %>
+            <%= render partial: 'users/membership', locals:{member: member, index: index} %>
+          <% end %>
+        </table>
+      </div>
     <% end %>
     <% if @upcoming_activities.any? %>
-      <h3 class="bg-primary">My upcoming activities: <%= @upcoming_activities.count %></h3>
-      <ul class="activities">
-        <%= render @upcoming_activities %>
-      </ul>
+      <div class="panel panel-primary">
+        <!-- Default panel contents -->
+        <div class="panel-heading">My upcoming activities: <%= @upcoming_activities.count %></div>
+        <ul class="activities">
+          <%= render @upcoming_activities %>
+        </ul>
+      </div>
     <% end %>
   </div>
 </div>
