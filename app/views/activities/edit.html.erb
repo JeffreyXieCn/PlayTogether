@@ -1,9 +1,9 @@
 <% provide(:title, "Edit activity") %>
 <% provide(:button_text, 'Save changes') %>
 <h1>Update activity info</h1>
-
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+    <%= link_to "Back to activity", activity_path(@activity) %>
     <%= render partial: 'form', locals: {target: activity_path(@activity)} %>
   </div>
 </div>

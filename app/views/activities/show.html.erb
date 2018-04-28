@@ -39,30 +39,31 @@
     </p>
 
     <% if @activity.scheduled? %>
+      <ul class="list-inline">
       <% if current_user && user_in_club?(current_user, @activity.club) %>
         <% if player?(current_user, @activity) %>
-          <%= link_to "Quit", quit_activity_path(@activity), method: :post %>
+          <li><%= link_to "Quit", quit_activity_path(@activity), method: :post %></li>
         <% else %>
-          <%= link_to "Attend", attend_activity_path(@activity), method: :post %>
+          <li><%= link_to "Attend", attend_activity_path(@activity), method: :post %></li>
         <% end %>
       <% end %>
 
       <% if current_user && user_club_admin?(current_user, @activity.club) %>
-        <%= link_to "Edit", edit_activity_path(@activity) %>
-        <%= link_to "Cancel activity", cancel_activity_path(@activity),
-                                       method: :post, data: {confirm: "You sure? This can't be undone"}%>
-        <%= link_to "Complete and charge", complete_activity_path(@activity), method: :post %>
+          <li><%= link_to "Edit", edit_activity_path(@activity) %></li>
+          <li><%= link_to "Cancel activity", cancel_activity_path(@activity),
+                                       method: :post, data: {confirm: "You sure? This can't be undone"}%></li>
+          <li><%= link_to "Complete and charge", complete_activity_path(@activity), method: :post %></li>
       <% end %>
+      </ul>
     <% end %>
 
   </div>
 
   <div class="col-md-6 col-md-offset-3">
-    <h2>Registered players:</h2>
     <% if @players && @players.count == 0 %>
-      <p>Currently there is no players for this activity</p>
+      <h3 class="bg-primary">Currently there is no players for this activity</h3>
     <% else %>
-      <p>Total: <%= @players.count %></p>
+      <h3 class="bg-primary">Registered players: <%= @players.count %></h3>
       <table class="activity-players">
         <tr>
           <th>Name</th>

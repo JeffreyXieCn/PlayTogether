@@ -1,6 +1,6 @@
 <% provide(:title, "Edit club") %>
 <% provide(:button_text, 'Save changes') %>
-<h1>Update club info</h1>
+<h1><%= link_to @club.name, club_path(@club) %> | Update club info</h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">

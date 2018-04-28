@@ -12,18 +12,20 @@
       <%= @club.description %>
     </p>
 
+    <ul class="list-inline">
     <% if current_user && (! user_in_club?(current_user, @club)) %>
-      <%= link_to "Join", join_club_path(@club), method: :post %>
+        <li><%= link_to "Join", join_club_path(@club), method: :post %></li>
     <% end %>
     <% if current_user %>
-      <%= link_to "View members", members_club_path(@club) %>
-      <%= link_to "View activities", club_activities_path(@club) %>
+        <li><%= link_to "View members", members_club_path(@club) %></li>
+        <li><%= link_to "View activities", club_activities_path(@club) %></li>
     <% end %>
     <%# if current_user?(get_club_admin(club)) %>
     <% if current_user && user_club_admin?(current_user, @club)%>
-      <%= link_to "Edit", edit_club_path(@club) %>
-      <%= link_to "Delete", @club, method: :delete,
-                  data: { confirm: "You sure?" } %>
-    <% end %>
+        <li><%= link_to "Edit", edit_club_path(@club) %></li>
+        <li><%= link_to "Delete", @club, method: :delete,
+                        data: { confirm: "You sure?" } %></li>
+     <% end %>
+    </ul>
   </div>
 </div>

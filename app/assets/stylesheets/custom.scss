@@ -11,6 +11,16 @@ $gray-medium-light: #eaeaea;
   box-sizing:         border-box;
 }
 
+@mixin list_style{
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-lighter;
+  }
+}
+
 /* universal */
 
 body {
@@ -194,24 +204,25 @@ input {
 
 /* Users index */
 
-.users {
-  list-style: none;
-  margin: 0;
-  li {
-    overflow: auto;
-    padding: 10px 0;
-    border-bottom: 1px solid $gray-lighter;
-  }
+.users{
+  @include list_style;
 }
 
-.hypers {
-  display: table;
-  postion: relative;
-  margin-left: auto;
-  margin-right: auto;
+.clubs{
+  @include list_style;
 }
 
-.d-inline-block {
-  display: inline-block!important;
-  margin-left: 20px;
+.activities{
+  @include list_style;
+}
+
+/* make all the images in the website rounded */
+img {
+  @extend .img-rounded;
+}
+
+table {
+  @extend .table;
+  @extend .table-striped;
+  @extend .table-condensed;
 }

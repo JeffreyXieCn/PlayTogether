@@ -11,7 +11,7 @@
 
   <div class="col-md-8">
     <% if @user.members.any? %>
-      <h3>My clubs: <%= @user.members.count %></h3>
+      <h3 class="bg-primary">My clubs: <%= @user.members.count %></h3>
       <table class="user_memberships">
         <tr>
           <th>No.</th>
@@ -24,7 +24,7 @@
       </table>
     <% end %>
     <% if @upcoming_activities.any? %>
-      <h3>My upcoming activities:</h3>
+      <h3 class="bg-primary">My upcoming activities: <%= @upcoming_activities.count %></h3>
       <ul class="activities">
         <%= render @upcoming_activities %>
       </ul>
