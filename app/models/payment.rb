@@ -15,4 +15,5 @@
 
 class Payment < ApplicationRecord
   belongs_to :member
+  # TODO Add functionality to show payment history, sort by date or clubs
 end
