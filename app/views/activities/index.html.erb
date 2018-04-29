@@ -1,13 +1,15 @@
 <% provide(:title, 'All activities') %>
 <h1><%= link_to @club.name, club_path(@club) %> | All activities</h1>
 <% if current_user && user_club_admin?(current_user, @club)%>
-  <%= link_to new_club_activity_path(@club) , {class: "btn btn-primary", role: "button"} do %>
+  <div><%= link_to new_club_activity_path(@club) , {class: "btn btn-primary", role: "button"} do %>
     <i class="glyphicon glyphicon-plus"></i> New activity
-  <% end%>
+    <% end%>
+    <br><br>
+  </div>
 <% end %>
 
 <% if @activities && @activities.count == 0 %>
-  <p>Currently there is no activities for this club</p>
+  <div class="alert alert-warning" role="alert">Currently there is no activities for this club</div>
 <% else %>
   <%= will_paginate %>
 
