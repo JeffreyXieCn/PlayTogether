@@ -16,8 +16,9 @@ class UsersController < ApplicationController
     #debugger #this will work even if running rails test
     # TODO consider using Bootstrap Accordion to show upcoming activities
     #@upcoming_activities = Activity.joins(:players).where(players: {user_id: @user.id}, activities: {})
-    @upcoming_activities = Activity.joins(:players).where('players.user_id = ? and activities.start_time >= ?',
-                                                          @user.id, Time.current)
+    @upcoming_activities = Activity.joins(:players).where('players.user_id = ? and activities.start_time >= ?
+                                                           and activities.status = ?', @user.id, Time.current,
+                                                          Activity.statuses[:scheduled]) #note statuses instead of status
   end
 
   def new
@@ -25,13 +26,8 @@ class UsersController < ApplicationController
   end
   
   def create
-    #@user = User.new(params[:user])    # Not the final implementation!
     @user = User.new(user_params)
     if @user.save
-      #log_in @user
-      #flash[:success] = "Welcome to the Sample App!"
-      #redirect_to @user
-      #UserMailer.account_activation(@user).deliver_now
       @user.send_activation_email
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url

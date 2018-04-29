@@ -1,0 +1,9 @@
+<%if activity.scheduled? %>
+  <span class="label label-info"><%= activity.status %></span>
+<% elsif activity.cancelled? %>
+  <span class="label label-danger"><%= activity.status %></span>
+<% elsif activity.completed? %>
+  <span class="label label-success"><%= activity.status %></span>
+<% else %>
+  <span class="label label-default"><%= activity.status %></span>
+<% end %>

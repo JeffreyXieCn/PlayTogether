@@ -76,16 +76,20 @@ class ActivitiesController < ApplicationController
   end
 
   def complete
-    @activity.update_attributes(status: 'completed')
     players = @activity.players
-    average_cost = (@activity.total_cost.to_f / players.count).round(2)
-    players.each do |player|
-      player.update_attributes(cost: average_cost)
-      member = Member.find_by(user_id: player.user.id, club_id: @activity.club.id)
-      new_balance = member.balance - average_cost
-      member.update_attributes(balance: new_balance)
+    if players.empty?
+      flash[:warning] = "An activity without players can't be marked as completed"
+    else
+      @activity.update_attributes(status: 'completed')
+      average_cost = (@activity.total_cost.to_f / players.count).round(2)
+      players.each do |player|
+        player.update_attributes(cost: average_cost)
+        member = Member.find_by(user_id: player.user.id, club_id: @activity.club.id)
+        new_balance = member.balance - average_cost
+        member.update_attributes(balance: new_balance)
+      end
+      flash[:success] = "This activity is now completed, and each player is charged #{average_cost}"
     end
-    flash[:success] = "This activity is now completed, and each player is charged #{average_cost}"
     redirect_to @activity
   end
 

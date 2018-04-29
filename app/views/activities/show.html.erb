@@ -35,7 +35,7 @@
 
     <p>
       <strong>Status:</strong>
-      <%= @activity.status %>
+      <%= render partial: 'activities/status', locals:{activity: @activity} %>
     </p>
 
     <% if @activity.scheduled? %>
@@ -52,7 +52,9 @@
           <li><%= link_to "Edit", edit_activity_path(@activity) %></li>
           <li><%= link_to "Cancel activity", cancel_activity_path(@activity),
                                        method: :post, data: {confirm: "You sure? This can't be undone"}%></li>
-          <li><%= link_to "Complete and charge", complete_activity_path(@activity), method: :post %></li>
+          <% if @players.any? %>
+            <li><%= link_to "Complete and charge", complete_activity_path(@activity), method: :post %></li>
+          <% end %>
       <% end %>
       </ul>
     <% end %>

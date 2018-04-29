@@ -31,7 +31,7 @@
 
   <p>
     <strong>Status:</strong>
-    <%= activity.status %>
+    <%= render partial: 'activities/status', locals:{activity: activity} %>
   </p>
 
 </li>
